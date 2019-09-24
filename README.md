@@ -14,6 +14,7 @@ cd maraBi && chmod +x maraBi
 + elasticdump  
 
 **How Install Requirements**  
-sorry!!! google is the best friend, or visit [how install nodejs](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/) and run `npm install elasticdump -g`
+sorry!!!  
+google is the best friend, or visit [how install node.js](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/) and run `npm install elasticdump -g`
 
-**thanks to X**
+**Thanks to X**
