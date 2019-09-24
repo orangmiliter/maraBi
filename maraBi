@@ -10,7 +10,6 @@ else
 		echo "Please install elasticdump"
 		exit 0
 	else
-		# indexes=`curl -s -X GET "$1_cat/indices?v" |cut -b15- | cut -d' ' -f1 |grep -v '^.monitoring' |grep -v '^filebeat' |grep -v '^logstash'| grep -v '^metricbeat' | sort`
 		indexes=`curl -s -X GET "$1_cat/indices?v" |cut -b15- | cut -d' ' -f1 |grep -Ev '^.monitoring|^filebeat|^logstash|^metricbeat|kibana' | sort`
 		type="settings analyzer data mapping alias template"
 
@@ -18,21 +17,18 @@ else
 		do
 			# dump routine here
 			echo "Creating directory structure for $index"
-			# tgt_dir=`echo $1 |cut -d/ -f3 |cut -d: -f1`
 			tgt_dir=`echo $1 |cut -d/ -f3`
 			mkdir -p $tgt_dir/$index
 
 			for j in $type
 			do 
 				echo "Dumping $j for index $index"
-				# elasticdump --limit 1000 --input $1$index --output $tgt_dir/$index/$j.json --type $j
 				elasticdump --input $1$index --output $tgt_dir/$index/$j.json --type $j
 			done
 
 			echo
 		done
-
-		# echo
+		
 		echo "Dumping done"
 	fi
 fi
